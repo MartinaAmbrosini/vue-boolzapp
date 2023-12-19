@@ -9,10 +9,39 @@
     <title>Boozlapp</title>
 </head>
 <body>
-
-
-
-
+    <main>
+        <div id="app">
+            <div id="container">
+                <div id="sidebar">
+                    <div class="user-account d-flex justify-content-between p-3" style="background-color: #eaeaea;">
+                        <div class="user-information">
+                            <img src="img/avatar_io.png" alt="">
+                            <span style="font-weight: bold;">Martina</span>
+                        </div>
+                        <div class="user-settings d-flex align-items-center">
+                            <a href="#"><i class="fa-solid fa-circle-notch user-icons m-2" style="color: grey;"></i></a>
+                            <a href="#"><i class="fa-solid fa-message user-icons m-2" style="color: grey;" ></i></a>
+                            <a href="#"><i class="fa-solid fa-ellipsis-vertical user-icons m-2" style="color: grey;"></i></a>
+                        </div>
+                    </div>
+                    <div class="new-notification d-flex align-items-center p-2" style="background-color: #8edafc;">
+                        <a href="#"><i class="fa-solid fa-bell-slash"></i></a>
+                        <div class="notifications-message">
+                            <span>Ricevi notifiche di nuovi messaggi</span>
+                            <a href="#" id="notify">Attiva notifiche desktop</a>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input type="text" class="form-control">
+                    </div>
+                </div> <!-- end sidebar-->
+            </div> <!--end container-->
+        </div>  <!--end app-->
+    </main>
+<script src=" https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js "></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="js/script.js"></script>
 </body>

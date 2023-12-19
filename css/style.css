@@ -3,3 +3,57 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    background-image: url(../img/backgroung.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#container{
+    background-color: white;
+    width: 70%;
+    margin: 40px auto;
+    height: calc(100vh - 80px);
+    display: flex;
+    overflow: hidden;
+    
+}
+
+#sidebar{
+    min-width: 400px;
+    height: 100%;
+    border-right: 1px solid lightgray;
+}
+
+
+.user-information img {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 50px;
+    margin: 5px;
+}
+
+.fa-bell-slash{
+    color: #8edafc;
+    background-color: white;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 15px;
+}
+
+.notifications-message{
+    padding-left: 5px;
+    font-size: 10px;
+}
+
+.notifications-message span{
+    display: block;
+    font-size: 15px;
+}
+
+#notify{
+    text-decoration: underline;
+    color: #4f7494;
+    font-size: 13px;
+}
