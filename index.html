@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Boozlapp</title>
 </head>
+
 <body>
     <main>
         <div id="app">
@@ -20,8 +23,9 @@
                         </div>
                         <div class="user-settings d-flex align-items-center">
                             <a href="#"><i class="fa-solid fa-circle-notch user-icons m-2" style="color: grey;"></i></a>
-                            <a href="#"><i class="fa-solid fa-message user-icons m-2" style="color: grey;" ></i></a>
-                            <a href="#"><i class="fa-solid fa-ellipsis-vertical user-icons m-2" style="color: grey;"></i></a>
+                            <a href="#"><i class="fa-solid fa-message user-icons m-2" style="color: grey;"></i></a>
+                            <a href="#"><i class="fa-solid fa-ellipsis-vertical user-icons m-2"
+                                    style="color: grey;"></i></a>
                         </div>
                     </div>
                     <div class="new-notification d-flex align-items-center p-2" style="background-color: #8edafc;">
@@ -33,16 +37,44 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
                         </div>
                         <input type="text" class="form-control">
                     </div>
+                    <div class="contacts-list">
+                        <div class="contact-item" v-for="(contact,i) in contacts" :key="i">
+                            <img :src="contact.avatar">
+                            <span style="font-weight: bold;">{{contact.name}}</span>
+                            <span>{{contact.messages[contact.messages.length - 1].message}}</span>
+                            <span>{{contact.messages[contact.messages.length - 1].date}}</span>
+                        </div>
+                    </div>
                 </div> <!-- end sidebar-->
+                <div class="chat">
+                    <div class="topbar"></div>
+                    <div class="chat-container">
+                        <div class="message" v-for="(contact,i) in contacts" :key="i">
+                            <template v-if="contact.visible">
+                                <div class="message-container" v-for="(msg,k) in contact.messages" :key="k">
+                                    <div class="sent" v-if="msg.status === 'sent'">
+                                        <span>{{msg.message}}</span>
+                                        <span>{{msg.date}}</span>
+                                    </div>
+                                    <div class="received" v-if="msg.status === 'received'">
+                                        <span>{{msg.message}}</span>
+                                        <span>{{msg.date}}</span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
             </div> <!--end container-->
-        </div>  <!--end app-->
+        </div> <!--end app-->
     </main>
-<script src=" https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js "></script>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="js/script.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js "></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
