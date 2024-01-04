@@ -27,50 +27,86 @@
                             <a href="#"><i class="fa-solid fa-ellipsis-vertical user-icons m-2"
                                     style="color: grey;"></i></a>
                         </div>
-                    </div>
+                    </div> <!-- end user-account -->
                     <div class="new-notification d-flex align-items-center p-2" style="background-color: #8edafc;">
                         <a href="#"><i class="fa-solid fa-bell-slash"></i></a>
                         <div class="notifications-message">
                             <span>Ricevi notifiche di nuovi messaggi</span>
                             <a href="#" id="notify">Attiva notifiche desktop</a>
                         </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        </div>
-                        <input type="text" class="form-control">
-                    </div>
+                    </div> <!-- end new-notification -->
+                    <div class="container-fluid ms_container-fluid">
+                        <form class="d-flex" role="search">
+                            <a href="#"><i class="fa-solid fa-magnifying-glass ms_form-icon"></i></a>
+                            <input class="form-control me-2 ms_form" type="search"
+                                placeholder="Cerca o inizia una nuova chat" aria-label="Search" v-model="search" @keyup="cerca(search)" >
+                        </form>
+                    </div> <!-- end search-contact-bar -->
                     <div class="contacts-list">
-                        <div class="contact-item" v-for="(contact,i) in contacts" :key="i">
-                            <img :src="contact.avatar">
-                            <span style="font-weight: bold;">{{contact.name}}</span>
-                            <span>{{contact.messages[contact.messages.length - 1].message}}</span>
-                            <span>{{contact.messages[contact.messages.length - 1].date}}</span>
-                        </div>
-                    </div>
-                </div> <!-- end sidebar-->
+                        <div class="contact-item" @click="active(i)" v-for="(contact,i) in contacts" :key="i" :class="contact.visible ? 'active' : '', contact.filter ? '' : 'd-none'">
+                            <div class="chat-information d-flex justify-content-between">
+                                <img :src="contact.avatar">
+                                <div class="p-2"><span style="font-weight: bold;">{{contact.name}}</span><br><span
+                                        style="font-size: 12px;">{{contact.messages[contact.messages.length - 1].message}}</span></div>
+                                <div class="ms-auto p-2 mt-2" style="font-size: 11px;">
+                                    {{contact.messages[contact.messages.length - 1].date}}</div>
+                            </div>
+                            <div style="border: 1px solid #f5f5f5;"></div>
+                        </div> <!-- end contact-item -->
+                    </div> <!-- end contacts-list -->
+                </div> <!-- end sidebar -->
                 <div class="chat">
-                    <div class="topbar"></div>
-                    <div class="chat-container">
-                        <div class="message" v-for="(contact,i) in contacts" :key="i">
-                            <template v-if="contact.visible">
-                                <div class="message-container" v-for="(msg,k) in contact.messages" :key="k">
-                                    <div class="sent" v-if="msg.status === 'sent'">
-                                        <span>{{msg.message}}</span>
-                                        <span>{{msg.date}}</span>
-                                    </div>
-                                    <div class="received" v-if="msg.status === 'received'">
-                                        <span>{{msg.message}}</span>
-                                        <span>{{msg.date}}</span>
-                                    </div>
+                    <div class="chat-content" v-for="(contact,i) in contacts" :key="i" :class="!contact.visible ? 'd-none' : ''">
+                        <div class="topbar">
+                            <div class="user-account d-flex justify-content-between p-3" style="background-color: #eaeaea;">
+                                <div class="user-information">
+                                    <img :src="contact.avatar" alt="">
+                                    <span style="font-weight: bold;">{{contact.name}}</span>
                                 </div>
-                            </template>
+                                <div class="user-settings d-flex align-items-center">
+                                    <a href="#"><i class="fa-solid fa-search user-icons m-2" style="color: grey;"></i></a>
+                                    <a href="#"><i class="fa-solid fa-paperclip user-icons m-2"
+                                        style="color: grey;"></i></a>
+                                    <a href="#"><i class="fa-solid fa-ellipsis-vertical user-icons m-2"
+                                        style="color: grey;"></i></a>
+                                </div>
+                            </div>
+                        </div> <!-- end topbar-chat -->
+                        <div class="chat-container">
+                            <div class="message-container p-5 d-flex flex-column">
+                                <template v-if="contact.visible">
+                                    <div class="message" v-for="(msg,k) in contact.messages" :key="k">
+                                        <div class="sent p-3 m-2" v-if="msg.status === 'sent'">
+                                            <span>{{msg.message}}</span>
+                                            <span class="time">{{msg.date}}</span>
+                                        </div>
+                                        <div class="received p-3 m-2" v-if="msg.status === 'received'">
+                                            <span>{{msg.message}}</span>
+                                            <span class="time">{{msg.date}}</span>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div> <!-- end chat-container -->
+                    </div> <!-- end chat-content -->
+                    <div class="footer-chat">
+                        <div class="message_form lightGray">
+                            <div class="emojy userIcons">
+                                <a href="#">
+                                    <i class="fa-regular fa-face-smile"></i>
+                                </a>
+                            </div>
+                            <input type="text" name="" id="" placeholder="Scrivi un messaggio" v-model="messaggio" @keyup.enter="invia(messaggio)">
+                            <div class="userIcons">
+                                <a href="#">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div> <!--end container-->
-        </div> <!--end app-->
+                    </div> <!-- end footer-chat -->
+                </div> <!-- end chat -->
+            </div> <!--end container -->
+        </div> <!--end app -->
     </main>
     <script src=" https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js "></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
